@@ -128,6 +128,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'users:login'
 LOGOUT_URL = 'users:logout'
 
-#Email
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = Path.joinpath(BASE_DIR, "/users/templates/mails/")
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#media
+MEDIA_URL = 'media/'
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media/')

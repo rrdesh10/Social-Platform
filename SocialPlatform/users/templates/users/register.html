@@ -1,0 +1,13 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+<h1>Register</h1>
+    <form class="form-control" method="POST">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        <br/>
+        <input class="btn btn-primary" type="submit">
+    </form>
+
+{% endblock %}
