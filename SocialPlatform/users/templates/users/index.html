@@ -1,7 +1,13 @@
 {% extends 'users/base.html' %}
 
 {% block content %}
-<h1>Homepage Welcome</h1>
+<a href="{% url 'users:register' %} ">Register</a><br/>
 
-<a href="{% url 'users:register' %} ">Register</a>
+{% for post in posts %}
+    <h2>{{ post.title }}</h2>
+    {{ post.user }}
+    <img src="{{post.image.url }}" alt="">
+    <p>{{ post.caption}}</p>
+    {{post.created}}
+{% endfor %}
 {% endblock %}
