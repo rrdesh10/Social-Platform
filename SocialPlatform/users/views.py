@@ -2,8 +2,9 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm, UserRegistrationForm
+from .forms import LoginForm, UserRegistrationForm, ProfileEdit, UserEditForm
 from .models import Profile
+from posts.models import Post
 
 
 def login_user(request):
@@ -24,7 +25,9 @@ def login_user(request):
 
 @login_required
 def index(request):
-    return render(request, 'users/index.html')
+    current_user = request.user
+    posts = Post.objects.filter(user=current_user)
+    return render(request, 'users/index.html', {'posts':posts})
 
 
 def register(request):
@@ -40,3 +43,17 @@ def register(request):
     else:
         user_form = UserRegistrationForm()
         return render(request, 'users/register.html', {'user_form':user_form})
+
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEdit(instance=request.user.profile, data=request.POST, files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEdit(instance=request.user.profile)
+    return render(request, "users/edit.html", {'user_form':user_form, 'profile_form':profile_form})
