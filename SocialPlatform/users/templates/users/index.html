@@ -1,13 +1,35 @@
 {% extends 'users/base.html' %}
-
+{% load static %}
 {% block content %}
-<a href="{% url 'users:register' %} ">Register</a><br/>
+<div class="flex mt-5 p-3 justify-center">
+    <h2 class="text-2xl text-gray-800 font-normal mb-2">My Posts</h2>
+</div>
+<div class="gird gird-cols-2 p-10 place-items-center mx-60">
+    {% for post in posts %}
+    <!--  card starts here -->
+        
+        <a href="#">
+            <div class="round overflow-hidden w-[500px] h-[500px]  bg-white shadow-md"></div>
+            <div class="user-container flex mx-5 my-5">
+                <img class="h-10 w-10 rounded-full" src="{{profile.photo.url }}" alt="">
+                <div class="mx-2 my-2 font-bold"><span class="text-indigo-600">{{post.user }}</span></div>
+            </div>
+                <img src="{{post.image.url }}" alt="">
+            <div class="py-4 px-6">
+                <div class="icon-container flex gap-5">
+                    <img class="h-6 w-6 " src="{% static 'users/images/like.png' %}">
+                    <img class="h-6 w-6 " src="{% static 'users/images/comment.png' %}">
+                    <img class="h-6 w-6 " src="{% static 'users/images/share.png' %}">
+                </div>
+            </div>
+            <div class="py-4 px-6">
+                <div class="font-bold text-xl">{{ post.title }}</div>
+                <p class="font-normal text-gray-500">{{ post.caption}}</p>
+            </div>
+        </a>
+    <!-- card end -->
+    {% endfor %}
+</div>
 
-{% for post in posts %}
-    <h2>{{ post.title }}</h2>
-    {{ post.user }}
-    <img src="{{post.image.url }}" alt="">
-    <p>{{ post.caption}}</p>
-    {{post.created}}
-{% endfor %}
 {% endblock %}
+

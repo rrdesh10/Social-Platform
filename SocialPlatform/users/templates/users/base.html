@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'users/style.css' %}">
+    <link rel="stylesheet" href="{% static 'users/custom.css' %}">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <title></title>
 </head>
 <body>
@@ -24,6 +26,7 @@
                     <a class="py-4 px-2 font-semibold font-medium" href="{% url 'users:logout' %}">Logout</a>
                     {% else %}
                     <a class="py-4 px-2 font-semibold font-medium" href="{% url 'users:login' %}">Login</a>
+                    <a class="py-4 px-2 font-semibold font-medium" href="{% url 'users:register' %}">Register</a>
                     {% endif %}
                     <a class="py-4 px-2 font-semibold font-medium" href="">Link1</a>
                 </div>
