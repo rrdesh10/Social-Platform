@@ -1,3 +1,7 @@
 input:focus{
     outline: none;
 }
+
+#comment_form {
+    display: none;
+  }
